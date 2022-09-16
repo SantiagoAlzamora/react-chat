@@ -21,7 +21,7 @@ const Register = () => {
     try {
       const imageURL = await getImageUrl(file)
 
-      await axios.post("http://localhost:3001/api/users/register", {
+      await axios.post("https://santi-react-chat.herokuapp.com/api/users/register", {
         username: displayName,
         email,
         password,

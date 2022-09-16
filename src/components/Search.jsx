@@ -11,7 +11,7 @@ const Search = () => {
 
   const handleSearch = async () => {
     try {
-      const res = await axios.get(`http://localhost:3001/api/users/email/${email}`)
+      const res = await axios.get(`https://santi-react-chat.herokuapp.com/api/users/email/${email}`)
       setUser(res.data);
     } catch (err) {
       setErr(true);
@@ -27,7 +27,7 @@ const Search = () => {
       senderId: data.user._id,
       receiverId:user._id
     }
-    await axios.post(`http://localhost:3001/api/conversations`,body,{
+    await axios.post(`https://santi-react-chat.herokuapp.com/api/conversations`,body,{
       headers:{
         "Content-type":"application/json"
       }

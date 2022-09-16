@@ -15,7 +15,7 @@ const Chat = ({ currentChat, socket }) => {
   useEffect(() => {
     if (currentChat) {
       const getConversationMessages = async () => {
-        const res = await axios.get(`http://localhost:3001/api/messages/${currentChat._id}`)
+        const res = await axios.get(`https://santi-react-chat.herokuapp.com/api/messages/${currentChat._id}`)
         setMessages(res.data)
       }
 
@@ -36,7 +36,7 @@ const Chat = ({ currentChat, socket }) => {
       sender: data.user._id,
       text: message
     }
-    const res = await axios.post(`http://localhost:3001/api/messages/`, newMessage, {
+    const res = await axios.post(`https://santi-react-chat.herokuapp.com/api/messages/`, newMessage, {
       headers: {
         'Content-type': "application/json"
       }

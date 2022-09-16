@@ -5,7 +5,7 @@ import axios from 'axios'
 import { AuthContext } from '../context/AuthContext'
 import  io  from 'socket.io-client'
 
-const socket = io.connect("http://localhost:3001")
+const socket = io.connect("https://santi-react-chat.herokuapp.com/")
 
 const Home = () => {
 
@@ -19,7 +19,7 @@ const Home = () => {
   },[currentChat])
 
   const handleSelect = async (user) => {
-    const resConversation = await axios.get(`http://localhost:3001/api/conversations/${data.user._id}/${user._id}`)
+    const resConversation = await axios.get(`https://santi-react-chat.herokuapp.com/api/conversations/${data.user._id}/${user._id}`)
     setCurrentChat(resConversation.data)
   }
 

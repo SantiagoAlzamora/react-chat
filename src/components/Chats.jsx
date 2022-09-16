@@ -11,7 +11,7 @@ const Chats = ({handleSelect}) => {
   useEffect(()=>{
     const getUserChats = async ()=>{
       try {
-        const res = await axios.get(`http://localhost:3001/api/conversations/${data.user._id}`)
+        const res = await axios.get(`https://santi-react-chat.herokuapp.com/api/conversations/${data.user._id}`)
         setChats(res.data)
       } catch (error) {
         console.log(error);

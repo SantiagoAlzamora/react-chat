@@ -15,7 +15,7 @@ const Login = () => {
     const password = e.target[1].value;
     
     try {
-      const res = await axios.post("http://localhost:3001/api/users/login",{
+      const res = await axios.post("https://santi-react-chat.herokuapp.com/api/users/login",{
         email,
         password
       })
