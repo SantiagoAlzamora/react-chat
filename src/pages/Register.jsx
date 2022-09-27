@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Add from "../img/addAvatar.png";
-import axios from 'axios'
 import { useNavigate, Link } from "react-router-dom";
+import { getImageUrl } from "../services/ImageService";
+import { registerUser } from "../services/userService";
 
 const Register = () => {
   const [err, setErr] = useState(false);
@@ -13,44 +14,24 @@ const Register = () => {
     const email = e.target[1].value;
     const password = e.target[2].value;
     const file = e.target[3].files[0];
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
     try {
       const imageURL = await getImageUrl(file)
 
-      await axios.post("https://santi-react-chat.herokuapp.com/api/users/register", {
+      await registerUser({
         username: displayName,
         email,
         password,
         image: imageURL
-      }, config)
+      })
       navigate("/login")
     } catch (error) {
       setErr(true)
-      setTimeout(()=>{
+      setTimeout(() => {
         setErr(false)
-      },5000)
+      }, 5000)
     }
   }
 
-  const getImageUrl = async (file) => {
-    const data = new FormData();
-    data.append("file", file);
-    data.append("upload_preset", "santi-preset");
-    data.append("cloud_name", "santicloud");
-
-
-    const res = await fetch("https://api.cloudinary.com/v1_1/santicloud/image/upload",
-      {
-        method: "post",
-        body: data,
-      })
-    const resultado = await res.json()
-    return resultado.secure_url
-  }
 
 
   return (
@@ -77,33 +58,3 @@ const Register = () => {
   );
 };
 export default Register;
-
-
-
-
-//import { storage } from "../firebase";
-//import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-
-//try {
-
-    //  const storageRef = ref(storage, displayName);
-
-    //  const uploadTask = uploadBytesResumable(storageRef, file);
-
-    //   uploadTask.on((error) => { setErr(true); }, () => {
-    //     getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-    //       const image = downloadURL
-    //       const user = await axios.post("http://localhost:3001/api/users/register", {
-    //         username: displayName,
-    //         email,
-    //         password,
-    //         image
-    //       }, config)
-    //       console.log(user)
-    //     });
-    //   }
-    //   );
-    // } catch (err) {
-    //   console.log(err)
-    //}
-  //}

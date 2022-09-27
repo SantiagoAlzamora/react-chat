@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from 'axios';
 import {AuthContext} from '../context/AuthContext'
+import { loginUser } from "../services/userService";
 
 const Login = () => {
   const [err, setErr] = useState(false);
@@ -15,13 +15,10 @@ const Login = () => {
     const password = e.target[1].value;
     
     try {
-      const res = await axios.post("https://santi-react-chat.herokuapp.com/api/users/login",{
-        email,
-        password
-      })
+      const user = await loginUser({email,password})
       dispatch({
         type:"LOGIN",
-        payload:res.data
+        payload:user
       })
       navigate('/')
     } catch (err) {

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import axios from "axios";
+import {getUserByEmail} from '../services/userService'
+import { addUserConversation } from "../services/conversationService";
 
 const Search = () => {
   const [email, setEmail] = useState("");
@@ -11,8 +12,9 @@ const Search = () => {
 
   const handleSearch = async () => {
     try {
-      const res = await axios.get(`https://santi-react-chat.herokuapp.com/api/users/email/${email}`)
-      setUser(res.data);
+      
+      const data = await getUserByEmail(email)
+      setUser(data);
     } catch (err) {
       setErr(true);
     }
@@ -27,11 +29,7 @@ const Search = () => {
       senderId: data.user._id,
       receiverId:user._id
     }
-    await axios.post(`https://santi-react-chat.herokuapp.com/api/conversations`,body,{
-      headers:{
-        "Content-type":"application/json"
-      }
-    })
+    addUserConversation(body)
     setUser(null);
     setEmail("")
   };

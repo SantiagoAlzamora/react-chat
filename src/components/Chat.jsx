@@ -5,7 +5,7 @@ import More from "../img/more.png";
 import Messages from "./Messages";
 import Input from "./Input";
 import { AuthContext } from "../context/AuthContext";
-import axios from "axios";
+import { getConversationMessages, saveMessage } from "../services/messageService";
 
 const Chat = ({ currentChat, socket }) => {
 
@@ -14,12 +14,8 @@ const Chat = ({ currentChat, socket }) => {
 
   useEffect(() => {
     if (currentChat) {
-      const getConversationMessages = async () => {
-        const res = await axios.get(`https://santi-react-chat.herokuapp.com/api/messages/${currentChat._id}`)
-        setMessages(res.data)
-      }
-
-      getConversationMessages()
+      getConversationMessages(currentChat._id)
+      .then(data=>setMessages(data))
     }
 
   }, [currentChat])
@@ -36,11 +32,7 @@ const Chat = ({ currentChat, socket }) => {
       sender: data.user._id,
       text: message
     }
-    const res = await axios.post(`https://santi-react-chat.herokuapp.com/api/messages/`, newMessage, {
-      headers: {
-        'Content-type': "application/json"
-      }
-    })
+    const res = await saveMessage(newMessage)
     await socket.emit("sendMessage", res.data)
     setMessages([...messages, res.data])
   }

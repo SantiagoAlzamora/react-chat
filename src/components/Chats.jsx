@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { getUserChats } from "../services/conversationService";
 
 const Chats = ({handleSelect}) => {
   const [chats, setChats] = useState([]);
@@ -9,15 +9,8 @@ const Chats = ({handleSelect}) => {
 
 
   useEffect(()=>{
-    const getUserChats = async ()=>{
-      try {
-        const res = await axios.get(`https://santi-react-chat.herokuapp.com/api/conversations/${data.user._id}`)
-        setChats(res.data)
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getUserChats()
+    getUserChats(data.user._id)
+    .then(data=>setChats(data))
   },[data.user._id])
 
 
