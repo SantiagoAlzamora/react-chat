@@ -38,7 +38,7 @@ const Register = () => {
     <div className="formContainer">
 
       <div className="formWrapper">
-        <span className="logo">Lama Chat</span>
+        <span className="logo">React Chat</span>
         <span className="title">Register</span>
         <form onSubmit={handleSubmit}>
           <input type="text" placeholder="display name" />
