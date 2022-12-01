@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
-      <span className="logo">Lama Chat</span>
+      <span className="logo">React Chat</span>
       <div className="user">
         <img src={data.user?.image} alt="" />
         <span>{data.user?.username}</span>
