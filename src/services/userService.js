@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const API_USERS_URL = "https://santi-react-chat.herokuapp.com/api/users"
+const API_USERS_URL = "https://react-chat-api.onrender.com/api/users"
 
 const config = {
     headers: {

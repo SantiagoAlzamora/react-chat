@@ -5,7 +5,7 @@ import { AuthContext } from '../context/AuthContext'
 import  io  from 'socket.io-client'
 import { selectConversation } from '../services/conversationService'
 
-const socket = io.connect("https://santi-react-chat.herokuapp.com/")
+const socket = io.connect("https://react-chat-api.onrender.com/")
 
 const Home = () => {
 

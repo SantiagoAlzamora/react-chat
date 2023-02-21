@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const API_MESSAGES_URL = `https://santi-react-chat.herokuapp.com/api/messages`
+const API_MESSAGES_URL = `https://react-chat-api.onrender.com/api/messages`
 const config = {
     headers: {
         'Content-type': "application/json"
